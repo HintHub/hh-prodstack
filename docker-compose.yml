@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+   php-fpm:
+    build:
+        context: ./
+    volumes:
+        - ./nginx/www/:/var/www
+   database:
+    build:
+        context: ./database
+    environment:
+        - MYSQL_DATABASE=hinthub
+        - MYSQL_USER=hinthub
+        - MYSQL_PASSWORD=KCjMxfFR4myB4YAnLZIpXfpvhmhnw2IB
+        - MYSQL_ROOT_PASSWORD=2gT53Wm3Z8eCFI9BtMC5bSme0EvTFWIw
+    volumes:
+        - ./database/data.sql:/docker-entrypoint-init.d/data.sql
+   nginx:
+    build:
+        context: ./nginx 
+    environment:
+            PHP_INI_DATE_TIMEZONE: 'Europe/Berlin'
+    volumes:
+            - ./nginx/www/:/var/www
+            - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+            - ./nginx/sites/:/etc/nginx/sites-available
+            - ./nginx/conf.d/:/etc/nginx/conf.d/
+    ports:
+            - "80:80"
+            - "443:443"
+    depends_on:
+            - php-fpm
