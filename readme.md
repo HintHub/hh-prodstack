@@ -10,9 +10,11 @@ cd into the dir
 
 Run `sudo chmod u+x install.sh` to make the install.sh executable
 
-After making it executable, run it. `sudo ./install.sh <appName> <dbUser> <dbPass>`
+After making it executable, run it. `sudo ./install.sh <appName> <dbUser> <dbPass> <domain>`
 
 The Script should do all the rest for you.
+
+In addition you can add the IP of the nginx_1 container (of the stack) to `/etc/hosts`, use the docker inspect command for that.
 
 ## Front nginx
 
@@ -52,4 +54,9 @@ or `php bin/console doctrine:migrations:migrate -n`
 
 The issue is that old data structures may be damaged, so backup the data before upgrading.
 
-*edited 06 Nov 2021 - Template by SAAD-IT*
+
+Then do a `git pull`, which should download the remote changes to local.
+
+Additionally you could do a `git reset --hard HEAD` (which destroys everything in the local repository and resets it to the HEAD of the branch)**
+
+*created 06 Nov 2021 - Template by SAAD-IT | changed 01/2021*
