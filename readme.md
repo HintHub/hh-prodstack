@@ -16,9 +16,11 @@ The Script should do all the rest for you.
 
 In addition you can add the IP of the nginx_1 container (of the stack) to `/etc/hosts`, use the docker inspect command for that.
 
-## Front nginx
+## Using a nginx reverse proxy in front
 
-If you want to use a nginx in front of the stack nginx, you should proxy_pass the traffic to it. Don't forget to generate a Lets Encrypt certificate by using certbot. Configure the main nginx to use TLS. 
+If you want to use a nginx in front of the nginx inside the stack, you should proxy_pass the traffic to <appName_nginx_1>. 
+
+Don't forget to generate a Lets Encrypt certificate by using certbot. Configure the main nginx to use TLS. 
 
 # Updating
 
