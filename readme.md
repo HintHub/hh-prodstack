@@ -8,18 +8,11 @@ Unpack the .tar.gz by using `tar xvzf tarname.tar.gz`
 
 cd into the dir
 
-Run `chmod u+x run.sh` to make the run.sh executable for the owner (user).
+Run `sudo chmod u+x install.sh` to make the install.sh executable
 
-do `./run.sh`
+After making it executable, run it. `sudo ./install.sh <appName> <dbUser> <dbPass>`
 
-Now the stack should be building as well spinning up three containers. You can observe that by using `docker ps`. 
-
-if your user is not root and not in the docker group, you should use sudo.
-
-If fixtures not loading, you should do that manually.
-
-Also you have to, depending on your Stack, add the docker container IP to `/etc/hosts`.
-docker inspect <container_name> helps you.  
+The Script should do all the rest for you.
 
 ## Front nginx
 
@@ -58,7 +51,5 @@ Either use `php bin/console doctrine:schema:update --force -n`
 or `php bin/console doctrine:migrations:migrate -n`
 
 The issue is that old data structures may be damaged, so backup the data before upgrading.
-
-
 
 *edited 06 Nov 2021 - Template by SAAD-IT*
