@@ -10,9 +10,9 @@ services:
     build:
         context: ./database
     environment:
-        - MYSQL_DATABASE=hinthub
-        - MYSQL_USER=hinthub
-        - MYSQL_PASSWORD=KCjMxfFR4myB4YAnLZIpXfpvhmhnw2IB
+        - MYSQL_DATABASE={dbDBName}
+        - MYSQL_USER={dbUser}
+        - MYSQL_PASSWORD={dbPass}
         - MYSQL_ROOT_PASSWORD=2gT53Wm3Z8eCFI9BtMC5bSme0EvTFWIw
     volumes:
         - ./database/data.sql:/docker-entrypoint-init.d/data.sql
