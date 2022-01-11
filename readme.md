@@ -34,36 +34,34 @@ Then do a `git pull`, which should download the remote changes to local.
 
 Additionally you could do a `git reset --hard HEAD` (which destroys everything in the local repository and resets it to the HEAD of the branch)**
 
-
-
 # Removal
 
 Use `sudo ./destroy.sh <appName>` then it removes all the files, except the files of this repo.
 
 # Configuration
 
-### General Environment
+## General Environment
 
-docker-compose.yml - Adjusting the docker containers, if you exchange User or PW, please adjust the code examples above, especially when you change SQL root
+docker-compose.yml - contains the docker-compose Stack Configuration
 
 .env.local - contains DB Credentials and stuff like that
 
-### Interesting Folders
+.env - should contain the same information like .env.local
 
-nginx/conf (Configuration for nginx)
+## Nginx Configuration Files
 
-nginx/www (WWW Folder, where all the Symfony Files and your Code are located)
+nginx/conf - Configuration for nginx
 
-nginx/sites (Vhost configuration, by default only one File, by the installer gets a new vhost created, with the entered domain)
+nginx/www - WWW Folder, where all the Symfony Files and your Code are located
 
-nginx/conf.d/ (Nginx configuration)
+nginx/sites - Vhost configuration, by default only one File, by the installer gets a new vhost created, with the entered domain
 
-### DB Config (Dockerfile noticed)
+nginx/conf.d/ - Nginx configuration
 
-database/ (Database Data and Configs)
+## DB Config  & DB Data Files
 
-database/data.sql (local MySQL DB, acts like SQL)
+database/  - Database Data and Configs
 
-
+database/data.sql - local MySQL DB, acts like SQL
 
 *created 06 Nov 2021 - Template by SAAD-IT | changed 01/2021*
