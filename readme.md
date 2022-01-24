@@ -4,8 +4,9 @@ test
 This docker stack allows you to run the production version of Hinthub as well the pre-prod (dev) version.
 
 # Installation
+check if docker-compose is installed.
 
-Unpack the .tar.gz by using `tar xvzf tarname.tar.gz`
+Unpack the .tar.gz by using `tar xvzf tarname.tar.gz` or use git clone 
 
 cd into the dir
 
