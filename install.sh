@@ -1,5 +1,6 @@
 #!/bin/bash
 # Install Script 01/2021 | Hinthub | Karim S
+repo="git@github.com:HintHub/HintHub.git"
 
 function check_set_appName ()
 {
@@ -44,7 +45,7 @@ function download_HintHub ()
 {
 	echo "[+] Downloading HintHub";
 	cd "nginx/www/"
-	git clone -b "develop" "https://git-se.iubh.de/GruppeHinthub/Hinthub.git" .
+	git clone -b "develop" "$repo" .
 	cd ../../
 	echo "[=] Done";
 }
