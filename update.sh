@@ -30,6 +30,7 @@ git fetch
 git reset --hard HEAD
 git pull
 
+chmod u+x update.sh
 
 # upgrade the stuff in nginx/www
 cd "nginx/www/";
