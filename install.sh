@@ -195,4 +195,6 @@ do_install "$appName"
 cd "$startPath";
 cp "nginx/www/.env" "nginx/www/.env.local"
 
+docker network connect "${appName}_default" "nginx"
+
 
