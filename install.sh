@@ -54,6 +54,7 @@ function download_HintHub ()
 	git remote add origin "$2"
 	git fetch --prune
 	git checkout "$1"
+	git pull
 	git reset --hard HEAD
 	git pull
 	cd ../../
@@ -152,6 +153,10 @@ function do_install ()
 	cp "nginx/www/.env.local" "nginx/www/.env"
 	
 	sudo docker exec -it "${appName}_php-fpm_1" php /var/www/bin/console cache:clear -n
+        p=$(pwd);
+        cd "nginx/www";
+        git stash
+        cd  "$p";
 }
 
 #
