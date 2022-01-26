@@ -138,7 +138,8 @@ function copy_and_replace_local_env ()
 
 function do_install ()
 {
-	appName="$1"
+	stackName="$1"
+	appName="$2"
 	sudo chmod u+x run.sh
 	./run.sh "$1"
 	sed -i "s/{sysEnv1}/development/g" "nginx/www/.env.local"
@@ -202,7 +203,7 @@ copy_rpl_nginx "$domain"
 copy_and_replace_docker_compose_vars "$dbUser" "$dbPass" "$dbName"
 copy_and_replace_local_env "$stackName" "$appName" "$dbUser" "$dbPass" "$dbName"
 
-do_install "$appName"
+do_install "$stackName" "$appName"
 
 cd "$startPath";
 cp "nginx/www/.env" "nginx/www/.env.local"
