@@ -13,6 +13,8 @@ if [ -z "$appName" ]; then
         exit;
 fi
 
+echo "[i] AppName: $appName";
+
 if [ -z "$prod" ]; then
         prod=0
         echo "[+] Prod disabled";
