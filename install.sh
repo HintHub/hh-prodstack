@@ -129,6 +129,7 @@ function copy_and_replace_local_env ()
         sed -i "s/{dbPass}/$dbPass/g" "$fname"
         sed -i "s/{dbName}/$dbName/g" "$fname"
 	sed -i "s/{appName}/$appName/g" "$fname"
+	sed -i "s/{stackName}/$stackName/g" "$fname"
 	sed -i "s/{appSecret}/$appSecret/g" "$fname"
 	
 	cp "$fname" "nginx/www/.env"
