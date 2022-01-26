@@ -6,13 +6,13 @@ repo="ssh://git@repo2.github.com/HintHub/HintHub.git"
 
 function check_stack_name()
 {
-{
 	if [ -z "$1" ]; then
 		echo "No stackName set";
 		echo "ERROR: $0 <stackName> <appName> <dbUser> <dbPass> <domain>";
 		exit;
 	fi
 }
+
 function check_set_appName ()
 {
 	if [ -z "$1" ]; then
