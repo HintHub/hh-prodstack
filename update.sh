@@ -72,3 +72,5 @@ if [ -f "docker-compose.yaml" ]; then
 fi
 
 chmod u+x update.sh
+
+cp "nginx/www/.env" "nginx/www/.env.local"
