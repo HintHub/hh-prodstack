@@ -1,0 +1,17 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = "ssh://git@repo1.github.com/HintHub/hh-prodstack.git"
+	fetch = +refs/heads/*:refs/remotes/origin/*
+
+[remote "origin"]
+        url = "ssh://git@repo2.github.com/HintHub/HintHub.git"
+        fetch = +refs/heads/*:refs/remotes/origin/*
+
+
+[branch "main"]
+	remote = origin
+	merge = refs/heads/main

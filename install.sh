@@ -1,7 +1,7 @@
 #!/bin/bash
 # Install Script 01/2021 | Hinthub | Karim S
 branch="develop"
-repo="git@github.com:HintHub/HintHub.git"
+repo="ssh://git@repo2.github.com/HintHub/HintHub.git"
 
 function check_set_appName ()
 {
@@ -40,13 +40,22 @@ function check_set_domain ()
 }
 
 
-
+function clear_nginx_folder ()
+{
+	find "nginx/www/." ! -name '.' ! -name '..' -delete
+}
 
 function download_HintHub ()
 {
 	echo "[+] Downloading HintHub";
 	cd "nginx/www/"
-	git clone -b "$branch" "$repo" .
+	#git clone -b "$1" "$2" .
+	git init
+	git remote add origin "$2"
+	git fetch --prune
+	git checkout "$1"
+	git reset --hard HEAD
+	git pull
 	cd ../../
 	echo "[=] Done";
 }
@@ -55,6 +64,7 @@ function configureGit ()
 {
 	# store git creds
 	git config credential.helper 'store'
+	cp copy/gitconfig .git/config
 }
 
 
@@ -165,8 +175,11 @@ dbName="$appName"    # appName
 
 echo -e "AppName: $appName\ndbUser: $dbUser\ndbPass: $dbPass\nStackName: $stackName\nDBName: $dbName\n\nDomain: $domain";
 
+clear_nginx_folder
 
-download_HintHub 
+download_HintHub "$branch" "$repo"
+configureGit
+
 copy_rpl_nginx "$domain"
 copy_and_replace_docker_compose_vars "$dbUser" "$dbPass" "$dbName"
 copy_and_replace_local_env "$appName" "$dbUser" "$dbPass" "$dbName"
