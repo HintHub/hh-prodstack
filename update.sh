@@ -68,3 +68,4 @@ else
         # clear cache
         sudo docker exec -it "$phpfpm" php /var/www/bin/console cache:clear -n 
 fi
+chmod u+x update.sh
