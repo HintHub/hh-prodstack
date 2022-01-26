@@ -3,7 +3,7 @@
 # reused by Karim S & HintHub Gruppe 01/2022
 
 # check if docker-compose.yml
-if [ ! -f "docker-compose.yml" ]; then
+if [ ! -f "docker-compose.yaml" ]; then
         echo "abort, no docker-compose.yaml";
         exit;
 fi
