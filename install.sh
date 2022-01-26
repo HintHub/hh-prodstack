@@ -1,5 +1,6 @@
 #!/bin/bash
 # Install Script 01/2021 | Hinthub | Karim S
+startPath=$(pwd);
 branch="develop"
 repo="ssh://git@repo2.github.com/HintHub/HintHub.git"
 
@@ -190,4 +191,8 @@ copy_and_replace_docker_compose_vars "$dbUser" "$dbPass" "$dbName"
 copy_and_replace_local_env "$appName" "$dbUser" "$dbPass" "$dbName"
 
 do_install "$appName"
+
+cd "$startPath";
+cp "nginx/www/.env" "nginx/www/.env.local"
+
 
