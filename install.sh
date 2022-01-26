@@ -4,11 +4,20 @@ startPath=$(pwd);
 branch="develop"
 repo="ssh://git@repo2.github.com/HintHub/HintHub.git"
 
+function check_stack_name()
+{
+{
+	if [ -z "$1" ]; then
+		echo "No stackName set";
+		echo "ERROR: $0 <stackName> <appName> <dbUser> <dbPass> <domain>";
+		exit;
+	fi
+}
 function check_set_appName ()
 {
 	if [ -z "$1" ]; then
 		echo "No AppName set";
-		echo "ERROR: $0 <appName> <dbUser> <dbPass> <domain>";
+		echo "ERROR: $0 <stackName> <appName> <dbUser> <dbPass> <domain>";
 		exit;
 	fi
 }
@@ -17,7 +26,7 @@ function check_set_dbUser ()
 {
         if [ -z "$1" ]; then
 		echo "No dbUser set";
-                echo "ERROR: $0 <appName> <dbUser> <dbPass> <domain>";
+                echo "ERROR: $0 <stackName> <appName> <dbUser> <dbPass> <domain>";
                 exit;
         fi
 }
@@ -26,7 +35,7 @@ function check_set_dbPass ()
 {
         if [ -z "$1" ]; then
 		echo "No dbPass set";
-                echo "ERROR: $0 <appName> <dbUser> <dbPass> <domain>";
+                echo "ERROR: $0 <stackName> <appName> <dbUser> <dbPass> <domain>";
                 exit;
         fi
 }
@@ -35,7 +44,7 @@ function check_set_domain ()
 {
         if [ -z "$1" ]; then
                 echo "No domain set";
-                echo "ERROR: $0 <appName> <dbUser> <dbPass> <domain>";
+                echo "ERROR: $0 <stackName> <appName> <dbUser> <dbPass> <domain>";
                 exit;
         fi
 }
@@ -165,18 +174,19 @@ function do_install ()
 #
 
 # check if parameters set
-check_set_appName  "$1"
-check_set_dbUser   "$2"
-check_set_dbPass   "$3"
-check_set_domain   "$4"
+check_stack_name   "$1"
+check_set_appName  "$2"
+check_set_dbUser   "$3"
+check_set_dbPass   "$4"
+check_set_domain   "$5"
 
 # set local space variables
-appName="$1"
-dbUser="$2"
-dbPass="$3"
-domain="$4"
-stackName="$appName" # appName
-dbName="$appName"    # appName
+stackName="$1"
+appName="$2"
+dbUser="$3"
+dbPass="$4"
+domain="$5"
+dbName="$stackName"    # appName
 
 
 echo -e "AppName: $appName\ndbUser: $dbUser\ndbPass: $dbPass\nStackName: $stackName\nDBName: $dbName\n\nDomain: $domain";
