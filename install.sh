@@ -117,11 +117,12 @@ function copy_rpl_nginx ()
 function copy_and_replace_local_env () 
 {
 	fname="nginx/www/.env.local"
-	appName="$1"
+	stackName="$1"
+	appName="$2"
 	appSecret=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 64 ; echo '');
-	dbUser="$2"
-	dbPass="$3"
-	dbName="$4"
+	dbUser="$3"
+	dbPass="$4"
+	dbName="$5"
 
 	cp "copy/env.local" "$fname"
 	
@@ -147,23 +148,23 @@ function do_install ()
 	
 	cp "copy/installscript.sh" "nginx/www/install.sh"
 	sudo chmod u+x "nginx/www/install.sh"
-	sudo docker restart "${appName}_php-fpm_1"
-	sudo docker restart "${appName}_database_1"
-	sudo docker restart "${appName}_nginx_1"
+	sudo docker restart "${stackName}_php-fpm_1"
+	sudo docker restart "${stackName}_database_1"
+	sudo docker restart "${stackName}_nginx_1"
 
-	sudo docker exec -it "${appName}_php-fpm_1" "../install.sh"
+	sudo docker exec -it "${stackName}_php-fpm_1" "../install.sh"
 	
-	sudo docker exec -it "${appName}_php-fpm_1" php /var/www/bin/console doctrine:database:drop --force -n
-	sudo docker exec -it "${appName}_php-fpm_1" php /var/www/bin/console doctrine:database:create -n
-	sudo docker exec -it "${appName}_php-fpm_1" php /var/www/bin/console doctrine:migrations:migrate -n
-	sudo docker exec -it "${appName}_php-fpm_1" php /var/www/bin/console doctrine:fixtures:load -n
+	sudo docker exec -it "${stackName}_php-fpm_1" php /var/www/bin/console doctrine:database:drop --force -n
+	sudo docker exec -it "${stackName}_php-fpm_1" php /var/www/bin/console doctrine:database:create -n
+	sudo docker exec -it "${stackName}_php-fpm_1" php /var/www/bin/console doctrine:migrations:migrate -n
+	sudo docker exec -it "${stackName}_php-fpm_1" php /var/www/bin/console doctrine:fixtures:load -n
 
 	sed -i "s/development/production/g" "nginx/www/.env.local"
         sed -i "s/dev/prod/g" "nginx/www/.env.local"
 
 	cp "nginx/www/.env.local" "nginx/www/.env"
 	
-	sudo docker exec -it "${appName}_php-fpm_1" php /var/www/bin/console cache:clear -n
+	sudo docker exec -it "${stackName}_php-fpm_1" php /var/www/bin/console cache:clear -n
         p=$(pwd);
         cd "nginx/www";
         git stash
@@ -199,13 +200,13 @@ configureGit
 
 copy_rpl_nginx "$domain"
 copy_and_replace_docker_compose_vars "$dbUser" "$dbPass" "$dbName"
-copy_and_replace_local_env "$appName" "$dbUser" "$dbPass" "$dbName"
+copy_and_replace_local_env "$stackName" "$appName" "$dbUser" "$dbPass" "$dbName"
 
 do_install "$appName"
 
 cd "$startPath";
 cp "nginx/www/.env" "nginx/www/.env.local"
 
-sudo docker network connect "${appName}_default" "nginx"
+sudo docker network connect "${stackName}_default" "nginx"
 
 
