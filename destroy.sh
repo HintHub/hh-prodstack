@@ -4,7 +4,7 @@
 
 # check if docker-compose.yml
 if [ ! -f "docker-compose.yml" ]; then
-        echo "abort, no docker-compose.yml";
+        echo "abort, no docker-compose.yaml";
         exit;
 fi
 
