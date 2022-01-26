@@ -8,6 +8,9 @@ if [ -z "$1" ]; then
 fi
 
 serviceName="$1"
+
+docker network disconnect "$1_default" "nginx"
+
 sudo docker-compose -p "$serviceName" down
 
 sudo rm docker-compose.yml
