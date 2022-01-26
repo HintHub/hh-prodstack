@@ -40,32 +40,35 @@ cd "$startPath";
 
 phpfpm="${appName}_php-fpm_1"
 
-# upgrades, cache clearings etc in each env
-if [ "$prod" == "1" ]; then
-        # when prod
+if [ -f "docker-compose.yaml" ]; then
+        # upgrades, cache clearings etc in each env
+        if [ "$prod" == "1" ]; then
+                # when prod
 
-        # upgrade the DB
-        sudo docker exec -it "$phpfpm" php /var/www/bin/console doctrine:migrations:migrate -n
+                # upgrade the DB
+                sudo docker exec -it "$phpfpm" php /var/www/bin/console doctrine:migrations:migrate -n
 
-        # optimize autoloader
-        sudo docker exec -it "$phpfpm" bash -c 'cd /var/www/ && composer dump-autoload --no-dev -o -a'
+                # optimize autoloader
+                sudo docker exec -it "$phpfpm" bash -c 'cd /var/www/ && composer dump-autoload --no-dev -o -a'
 
-        # clear cache
-        sudo docker exec -it "$phpfpm" php /var/www/bin/console cache:clear -n
+                # clear cache
+                sudo docker exec -it "$phpfpm" php /var/www/bin/console cache:clear -n
 
-else
-        # when not prod
+        else
+                # when not prod
 
-        # upgrade DB and load new fixtures
-        sudo docker exec -it "$phpfpm" php /var/www/bin/console doctrine:database:drop --force -n
-        sudo docker exec -it "$phpfpm" php /var/www/bin/console doctrine:database:create -n
-        sudo docker exec -it "$phpfpm" php /var/www/bin/console doctrine:migrations:migrate -n
-        sudo docker exec -it "$phpfpm" php /var/www/bin/console doctrine:fixtures:load -n 
+                # upgrade DB and load new fixtures
+                sudo docker exec -it "$phpfpm" php /var/www/bin/console doctrine:database:drop --force -n
+                sudo docker exec -it "$phpfpm" php /var/www/bin/console doctrine:database:create -n
+                sudo docker exec -it "$phpfpm" php /var/www/bin/console doctrine:migrations:migrate -n
+                sudo docker exec -it "$phpfpm" php /var/www/bin/console doctrine:fixtures:load -n 
 
-        # optimize autoloader
-        sudo docker exec -it "$phpfpm" bash -c 'cd /var/www/ && composer dump-autoload -o -a'
+                # optimize autoloader
+                sudo docker exec -it "$phpfpm" bash -c 'cd /var/www/ && composer dump-autoload -o -a'
 
-        # clear cache
-        sudo docker exec -it "$phpfpm" php /var/www/bin/console cache:clear -n 
+                # clear cache
+                sudo docker exec -it "$phpfpm" php /var/www/bin/console cache:clear -n 
+        fi
 fi
+
 chmod u+x update.sh
