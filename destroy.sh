@@ -9,7 +9,7 @@ fi
 
 serviceName="$1"
 
-docker network disconnect "$1_default" "nginx"
+sudo docker network disconnect "$1_default" "nginx"
 
 sudo docker-compose -p "$serviceName" down
 
