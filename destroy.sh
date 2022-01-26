@@ -2,6 +2,13 @@
 # Written by (vorlage) Karim S 09/2021 | SAAD-IT
 # reused by Karim S & HintHub Gruppe 01/2022
 
+# check if docker-compose.yml
+if [ ! -f "docker-compose.yml" ]; then
+        echo "abort, no docker-compose.yml";
+        exit;
+fi
+
+# check first Param (appName)
 if [ -z "$1" ]; then
 	echo "Error $0 <appName>";
 	exit;
