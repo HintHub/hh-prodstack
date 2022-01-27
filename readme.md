@@ -12,14 +12,10 @@ cd into the dir
 
 Run `sudo chmod u+x install_<env>.sh` to make the install_<env>_.sh executable
 
-
-
 **Copy Paste commands:**
 `sudo ./install_prod.sh "<stackName>" "<appName>" "<dbUser>" "<dbPass>" "<domain>" `
 
 `sudo ./install_dev.sh "<stackName>" "<appName>" "<dbUser>" "<dbPass>" "<domain>"`
-
-
 
 In the usual circumstances the script does everything for you.
 
@@ -40,8 +36,6 @@ It allows you to dynamically update the system.
 **Usage:**
 
 `sudo ./update.sh <stackName> [prodFlag]`
-
-
 
 You can also jump into the container and execute the following commands.
 
@@ -85,4 +79,4 @@ database/  - Database Data and Configs
 
 database/data.sql - local MySQL DB, acts like SQL
 
-*created 06 Nov 2021 - Template by SAAD-IT | changed 01/2021*
+*created 06 Nov 2021 - Template by SAAD-IT | changed 01/2022*
