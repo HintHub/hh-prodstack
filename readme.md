@@ -1,6 +1,9 @@
 # Hinthub Stack - Prod and Dev
-
 This docker stack allows you to run the production version of Hinthub as well the pre-prod (dev) version.
+
+1. Read this 
+2. Read that: [License.md](LICENSE.md)
+3. Go back to your work! :D
 
 # Installation
 
